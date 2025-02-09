@@ -1,0 +1,5 @@
+/* Write your T-SQL query statement below */
+select round( 1.00 * count(*)/(select count(distinct player_id) from activity) , 2) fraction
+from activity a
+join activity b on a.player_id = b.player_id and datediff(day,a.event_date,b.event_date) = 1
+where a.event_date = (select min(event_date) from activity where player_id = a.player_id)
