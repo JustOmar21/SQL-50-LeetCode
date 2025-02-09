@@ -1,0 +1,5 @@
+/* Write your T-SQL query statement below */
+select s.user_id, round(1.0 * count(nullif(x.action,'timeout'))/isnull( nullif(count(x.action),0) , 1) , 2) as confirmation_rate
+from signups s 
+left join Confirmations x on s.user_id = x.user_id
+group by s.user_id
