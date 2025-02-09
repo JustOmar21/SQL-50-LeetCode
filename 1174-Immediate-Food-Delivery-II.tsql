@@ -1,0 +1,5 @@
+/* Write your T-SQL query statement below */
+select round(100.00 * sum(case when order_date = customer_pref_delivery_date then 1 else 0 end)/count(order_date), 2)
+immediate_percentage
+from Delivery d 
+where order_date = (select min(order_date) from delivery where customer_id = d.customer_id)
