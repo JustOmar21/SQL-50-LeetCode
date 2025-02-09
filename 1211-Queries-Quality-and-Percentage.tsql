@@ -1,0 +1,8 @@
+/* Write your T-SQL query statement below */
+select 
+query_name,
+round( avg(1.00 * rating / position) , 2) quality , 
+round( 100.00 * sum(case when rating < 3 then 1 else 0 end) / count(rating)  , 2)
+poor_query_percentage
+from queries r
+group by query_name
