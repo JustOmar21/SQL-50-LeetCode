@@ -1,0 +1,8 @@
+/* Write your T-SQL query statement below */
+select distinct p.product_id , isnull(sub.new_price,10) price
+from (
+    select *, row_number() over(partition by product_id order by change_date desc) row from products
+    where change_date  <= '2019-08-16'
+) as sub
+right join products p on sub.product_id = p.product_id
+where row = 1 or row is null;
