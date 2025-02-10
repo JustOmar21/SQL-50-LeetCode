@@ -1,6 +1,6 @@
 # LeetCode
 
-This repository contains my solutions to SQL 50 Study Plan by LeetCode.
+This repository contains my solutions to [SQL 50 Study Plan](https://leetcode.com/studyplan/top-sql-50/) by LeetCode.
 
 Powered with :heart: by [LeetPush](https://github.com/husamahmud/LeetPush)
 
