@@ -1,0 +1,21 @@
+/* Write your T-SQL query statement below */
+
+with nameSub as (
+    select top 1 name as results , count(mr.user_id) as count from users u
+join movieRating mr on u.user_id = mr.user_id
+group by name
+order by count desc , name asc
+),
+titleSub as (
+select top 1 title as results , avg(1.00 * rating) avg
+from movies m
+join movieRating r on m.movie_id = r.movie_id 
+where created_at between '2020-02-1' and '2020-02-29'
+group by title
+order by avg desc , title 
+)
+
+
+select results from nameSub
+union all
+select results from titleSub
