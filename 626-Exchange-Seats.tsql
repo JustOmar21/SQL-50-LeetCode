@@ -1,0 +1,15 @@
+/* Write your T-SQL query statement below */
+select a.id ,b.student
+from seat a
+join seat b on a.id = b.id + 1
+where a.id % 2 = 0
+union all
+select b.id ,a.student
+from seat a
+join seat b on a.id = b.id + 1
+where a.id % 2 = 0
+union all
+select id , student
+from seat c
+where id = (select count(*) from seat) and id % 2 = 1
+order by id
