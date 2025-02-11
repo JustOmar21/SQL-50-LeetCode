@@ -1,0 +1,16 @@
+/* Write your T-SQL query statement below */
+with cte as (
+    select visited_on, sum(amount) amount
+    from customer
+    group by visited_on
+)
+
+select visited_on , 
+sum(amount) over (order by visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) amount,
+round(avg(1.00*amount) over (order by visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) , 2) average_amount
+from cte
+except
+select top 6 visited_on , 
+sum(amount) over (order by visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) amount,
+round(avg(1.00*amount) over (order by visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) , 2) average_amount
+from cte
