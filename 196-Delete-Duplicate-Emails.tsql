@@ -1,0 +1,6 @@
+/* Write your T-SQL query statement below */
+delete p
+from person p
+where id != (
+    select min(id) from person where p.email = email
+)
