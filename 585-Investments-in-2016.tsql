@@ -1,0 +1,12 @@
+/* Write your T-SQL query statement below */
+select round(1.00*sum(tiv_2016) , 2) tiv_2016
+from Insurance a
+where not exists (
+    select * 
+    from insurance
+    where a.pid != pid and a.lat = lat and a.lon = lon 
+) and exists (
+    select * 
+    from insurance
+    where a.pid != pid and a.tiv_2015 = tiv_2015
+)
