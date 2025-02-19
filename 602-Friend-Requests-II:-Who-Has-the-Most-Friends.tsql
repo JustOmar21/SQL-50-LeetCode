@@ -1,0 +1,15 @@
+/* Write your T-SQL query statement below */
+with cte as (
+    select accepter_id as id , count(accepter_id) num
+    from RequestAccepted
+    group by accepter_id
+    union all
+    select requester_id as id , count(requester_id) num
+    from requestAccepted
+    group by requester_id
+)
+
+select top 1 id , sum(num) num 
+from cte
+group by id
+order by num desc
